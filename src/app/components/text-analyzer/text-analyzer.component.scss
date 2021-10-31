@@ -1,0 +1,23 @@
+.header {
+  text-align: center;
+  font-family: monospace;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+textarea {
+  width: 100%;
+  max-width: 100%;
+  min-height: 150px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.submitBtn {
+  color: white;
+  width: 183px;
+  height: 44px;
+  border-radius: 21.5px;
+  background-color: #db202f;
+  padding: 8px 16px;
+}
