@@ -4,18 +4,15 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-text-analyzer',
   templateUrl: './text-analyzer.component.html',
-  styleUrls: ['./text-analyzer.component.scss']
+  styleUrls: ['./text-analyzer.component.scss'],
 })
 export class TextAnalyzerComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  submitBtn(textVal: any){
+  submitBtn(textVal: any) {
     console.log(textVal);
     this.router.navigate(['/result']);
   }
-
 }

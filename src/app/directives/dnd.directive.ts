@@ -4,11 +4,11 @@ import {
   Input,
   EventEmitter,
   HostBinding,
-  HostListener
+  HostListener,
 } from '@angular/core';
 
 @Directive({
-  selector: '[appDnd]'
+  selector: '[appDnd]',
 })
 export class DndDirective {
   @HostBinding('class.fileover') fileOver: boolean = false;

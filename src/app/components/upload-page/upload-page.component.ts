@@ -6,7 +6,7 @@ import { FileUploadService } from 'src/app/services/data-services/file-upload.se
 @Component({
   selector: 'app-upload-page',
   templateUrl: './upload-page.component.html',
-  styleUrls: ['./upload-page.component.scss']
+  styleUrls: ['./upload-page.component.scss'],
 })
 export class UploadPageComponent implements OnInit {
   // state$: Observable<object> = new Observable;
@@ -14,17 +14,20 @@ export class UploadPageComponent implements OnInit {
   files: any[] = [];
   fileToUpload: any = null;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private routingDataService:RoutingService, private fileUploadService: FileUploadService) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private routingDataService: RoutingService,
+    private fileUploadService: FileUploadService
+  ) {
     // this.selectedOption = this.routingDataService.selectedUploadOption;
-   }
+  }
 
   ngOnInit(): void {
     // this.state$ = this.activatedRoute.paramMap
     //   .pipe(map(() => window.history.state))
     // console.log("Upload Page -- ", this.state$);
-
     // console.log("State is -- ", window.history.state);
-
     // console.log("Upload page -- Option selected -- ", this.selectedOption);
   }
 
@@ -37,20 +40,20 @@ export class UploadPageComponent implements OnInit {
   // }
   fileBrowserHandler(event: any): void {
     // alert('fileBrowserHandler');
-    this.fileToUpload = event?.target?.files ? event.target.files : null ;
-    if(this.fileToUpload){
-    this.prepareFilesList(this.fileToUpload[0]);
+    this.fileToUpload = event?.target?.files ? event.target.files : null;
+    if (this.fileToUpload) {
+      this.prepareFilesList(this.fileToUpload[0]);
     }
   }
 
   /**
    * on file drop handler
    */
-   onFileDropped(event: any) {
+  onFileDropped(event: any) {
     // alert('onFileDropped');
-    this.fileToUpload = event? event[0]:null;
-    if(this.fileToUpload){
-    this.prepareFilesList(this.fileToUpload);
+    this.fileToUpload = event ? event[0] : null;
+    if (this.fileToUpload) {
+      this.prepareFilesList(this.fileToUpload);
     }
   }
 
@@ -58,14 +61,14 @@ export class UploadPageComponent implements OnInit {
    * Delete file from files list
    * @param index (File index)
    */
-   deleteFile(index: number) {
+  deleteFile(index: number) {
     this.files.splice(index, 1);
   }
 
   /**
    * Simulate the upload process
    */
-   uploadFilesSimulator(index: number) {
+  uploadFilesSimulator(index: number) {
     setTimeout(() => {
       if (index === this.files.length) {
         return;
@@ -92,11 +95,16 @@ export class UploadPageComponent implements OnInit {
     //   this.files.push(item);
     // }
     // this.uploadFilesSimulator(0);
-    this.fileUploadService.postFile(uploadFile).subscribe(data => {
-      // do something, if upload success
-      }, error => {
-        console.log(error);
-      });
+    console.log('File that has been uploaded is -- ', uploadFile);
+    // this.fileUploadService.postFile(uploadFile).subscribe(
+    //   (data) => {
+    //     // do something, if upload success
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+    this.router.navigate(['/result']);
   }
 
   /**
@@ -104,7 +112,7 @@ export class UploadPageComponent implements OnInit {
    * @param bytes (File size in bytes)
    * @param decimals (Decimals point)
    */
-   formatBytes(bytes: any, decimals?: any) {
+  formatBytes(bytes: any, decimals?: any) {
     if (bytes === 0) {
       return '0 Bytes';
     }
@@ -115,8 +123,7 @@ export class UploadPageComponent implements OnInit {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
-  switchToText(){
+  switchToText() {
     this.router.navigate(['/text']);
   }
-
 }

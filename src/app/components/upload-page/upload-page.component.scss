@@ -5,6 +5,7 @@
   border: dashed 1px #979797;
   position: relative;
   margin: 0 auto;
+  width: 70%;
 
   input {
     opacity: 0;
@@ -17,27 +18,28 @@
   }
 
   label {
-    color: white;
+    color: #efefef;
     width: 183px;
     height: 44px;
     border-radius: 21.5px;
-    background-color: #db202f;
+    background-color: #ff3b3f;
     padding: 8px 16px;
   }
 
   h3 {
     font-size: 20px;
     font-weight: 600;
-    color: #38424c;
+    // color: #38424c;
+    color: rgb(82, 82, 82);
   }
 }
 
 .textBtn {
-  color: white;
+  color: #efefef;
   width: 183px;
   height: 44px;
   border-radius: 21.5px;
-  background-color: #db202f;
+  background-color: #ff3b3f;
   padding: 8px 16px;
 }
 
@@ -89,8 +91,21 @@
 }
 
 .header {
+  margin-top: 50px;
+  margin-bottom: 20px;
   text-align: center;
   font-family: monospace;
   font-size: xx-large;
   font-weight: bold;
+}
+
+.footer {
+  text-align: center;
+  font-family: monospace;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.inner-content {
+  margin-top: 35px;
 }

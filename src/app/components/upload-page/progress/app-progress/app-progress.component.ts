@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-progress',
   templateUrl: './app-progress.component.html',
-  styleUrls: ['./app-progress.component.scss']
+  styleUrls: ['./app-progress.component.scss'],
 })
 export class AppProgressComponent implements OnInit {
   @Input() progress = 0;
