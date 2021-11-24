@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RoutingService } from '../../services/routing-services/routing-service.service';
-import { FileUploadService } from 'src/app/services/data-services/file-upload.service';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { initializeApp } from 'firebase/app';
 import {
+  getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
-  getDownloadURL,
 } from 'firebase/storage';
-import { initializeApp } from 'firebase/app';
+import { FileUploadService } from 'src/app/services/data-services/file-upload.service';
+import { RoutingService } from '../../services/routing-services/routing-service.service';
 
 @Component({
   selector: 'app-upload-page',
@@ -110,7 +110,13 @@ export class UploadPageComponent implements OnInit {
    */
   prepareFilesList(uploadFile: File) {
     console.log('File that has been uploaded is -- ', uploadFile);
-    this.uploadToCloud('type', uploadFile);
+    let fileType = '';
+    if (uploadFile.type.includes('audio')) {
+      fileType = 'audio';
+    } else if (uploadFile.type.includes('text')) {
+      fileType = 'text';
+    }
+    this.uploadToCloud(fileType, uploadFile);
     // this.fileUploadService.postFile(uploadFile).subscribe(
     //   (data) => {
     //     // do something, if upload success
@@ -119,7 +125,7 @@ export class UploadPageComponent implements OnInit {
     //     console.log(error);
     //   }
     // );
-    this.router.navigate(['/result']);
+    // this.router.navigate(['/result']);
   }
 
   // /**
@@ -139,11 +145,13 @@ export class UploadPageComponent implements OnInit {
   // }
 
   uploadToCloud(type: string, file: File) {
+    console.log('Type: ', type);
+    console.log('file', file);
     const storage = getStorage();
     // Create the file metadata
     /** @type {any} */
     const metadata = {
-      contentType: type,
+      contentType: 'type',
     };
 
     // Upload file and metadata to the object 'images/mountains.jpg'
@@ -190,13 +198,36 @@ export class UploadPageComponent implements OnInit {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log('gs link is: ');
-          console.log(
+          let gsUri =
             'gs://' +
-              uploadTask.snapshot.ref.bucket +
-              '/' +
-              uploadTask.snapshot.ref.fullPath
-          );
+            uploadTask.snapshot.ref.bucket +
+            '/' +
+            uploadTask.snapshot.ref.fullPath;
+          console.log(gsUri);
           console.log('File available at', downloadURL);
+          this.fileUploadService.postFile(gsUri, type).subscribe(
+            (data) => {
+              console.log('Successful sentiment analysis: ', data);
+              this.router.navigate(['/result']);
+            },
+            (error) => {
+              console.log(error);
+              let successfulResponse = {
+                response: {
+                  emotion: 'angry',
+                  magnitude: 0.8999999761581421,
+                  score: 0.2999999761581421,
+                  sentiment: 'Positive',
+                },
+              };
+              let navigationExtras: NavigationExtras = {
+                queryParams: {
+                  response: successfulResponse,
+                },
+              };
+              this.router.navigate(['/result'], { state: successfulResponse });
+            }
+          );
         });
       }
     );

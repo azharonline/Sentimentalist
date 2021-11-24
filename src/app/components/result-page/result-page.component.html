@@ -2,7 +2,7 @@
   <span>Negative</span>
   <mat-slider
     min="1"
-    max="100"
+    max="201"
     step="1"
     value="50"
     [value]="sentiVal"
@@ -129,5 +129,5 @@
 
 <div *ngIf="resultAvailable" class="bottom-align-content">
   Detected emotion is:
-  <img src="assets/happy.png" style="height: 75px; width: 75px" />
+  <img src="assets/{{ emotion }}.png" style="height: 75px; width: 75px" />
 </div>
