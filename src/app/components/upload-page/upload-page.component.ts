@@ -8,6 +8,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage';
+import { initializeApp } from 'firebase/app';
 
 @Component({
   selector: 'app-upload-page',
@@ -31,6 +32,29 @@ export class UploadPageComponent implements OnInit {
     // const storage = getStorage();
     // Create a storage reference from our storage service
     // const storageRef = ref(storage);
+    // const firebaseConfig = {
+    //   databaseURL: '<your-database-url>',
+    // };
+
+    // const firebaseConfig = {
+    //   projectId: 'sentimentalist-d5bc2',
+    //   appId: '1:906127856266:web:b14e839db809fa93289373',
+    //   storageBucket: 'sentimentalist-d5bc2.appspot.com',
+    //   apiKey: 'AIzaSyBWOEfshLiNQ_uMGFcUaIRfNTbJhTjyvcM',
+    //   authDomain: 'sentimentalist-d5bc2.firebaseapp.com',
+    //   messagingSenderId: '906127856266',
+    // };
+
+    const firebaseConfig = {
+      apiKey: 'AIzaSyDlrmqUt145-Lx_seFWl5L8-B_KjpwqqZ4',
+      authDomain: 'sentimentalist.firebaseapp.com',
+      projectId: 'sentimentalist',
+      storageBucket: 'sentimentalist.appspot.com',
+      messagingSenderId: '307151629619',
+      appId: '1:307151629619:web:6a7ce13953af40191fa246',
+      measurementId: 'G-X3TGMFDV2T',
+    };
+    const firebaseApp = initializeApp(firebaseConfig);
   }
 
   ngOnInit(): void {}
@@ -165,6 +189,13 @@ export class UploadPageComponent implements OnInit {
       () => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log('gs link is: ');
+          console.log(
+            'gs://' +
+              uploadTask.snapshot.ref.bucket +
+              '/' +
+              uploadTask.snapshot.ref.fullPath
+          );
           console.log('File available at', downloadURL);
         });
       }
