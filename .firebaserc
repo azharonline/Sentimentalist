@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "sentimentalist-d5bc2": {
+      "hosting": {
+        "Sentimentalist": [
+          "sentimentalist-d5bc2"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "sentimentalist-d5bc2"
+  }
+}

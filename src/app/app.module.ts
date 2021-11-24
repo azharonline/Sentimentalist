@@ -11,6 +11,12 @@ import { AppProgressComponent } from './components/upload-page/progress/app-prog
 import { ResultPageComponent } from './components/result-page/result-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideFunctions, getFunctions } from '@angular/fire/functions';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -28,6 +34,11 @@ import { MatSliderModule } from '@angular/material/slider';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
+    provideFunctions(() => getFunctions()),
+    provideStorage(() => getStorage()),
   ],
   providers: [],
   bootstrap: [AppComponent],

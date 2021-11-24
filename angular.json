@@ -105,6 +105,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "Sentimentalist:build:production",
+            "firebaseProject": "sentimentalist-d5bc2",
+            "firebaseHostingSite": "sentimentalist-d5bc2"
+          }
         }
       }
     }
