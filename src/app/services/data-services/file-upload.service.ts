@@ -9,13 +9,11 @@ export class FileUploadService {
   constructor(private httpClient: HttpClient) {}
 
   postFile(gsUri: string, inputType: string): Observable<Object> {
-    const endpoint = 'http://54.159.168.182:8080/sentiment';
+    // const endpoint = 'http://3.86.222.106:8080/sentiment';
+    const endpoint = 'http://localhost:4200/sentiment';
     let headers = new HttpHeaders();
-    // header.set('Access-Control-Allow-Origin', '*');
     headers.append('Access-Control-Allow-Origin', '*');
     const headersConfig = {
-      // Authorization: 'Bearer my-token',
-      // 'My-Custom-Header': 'foobar',
       'Access-Control-Allow-Origin': '*',
     };
     // const formData: FormData = new FormData();

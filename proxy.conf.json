@@ -1,0 +1,11 @@
+{
+    "/sentiment": {
+        "target": "http://54.164.19.177:8080/sentiment",
+        "pathRewrite": {
+            "^/sentiment": ""
+          },
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

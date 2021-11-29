@@ -208,21 +208,26 @@ export class UploadPageComponent implements OnInit {
           this.fileUploadService.postFile(gsUri, type).subscribe(
             (data) => {
               console.log('Successful sentiment analysis: ', data);
-              this.router.navigate(['/result']);
+              // this.router.navigate(['/result']);
+              this.router.navigate(['/result'], { state: data });
             },
             (error) => {
               console.log(error);
+              // let successfulResponse = {
+              //   response: {
+              //     emotion: 'sadness',
+              //     magnitude: 1.7000000476837158,
+              //     score: -0.800000011920929,
+              //     sentiment: 'Negative',
+              //   },
+              // };
+
               let successfulResponse = {
                 response: {
-                  emotion: 'angry',
+                  emotion: 'joy',
                   magnitude: 0.8999999761581421,
-                  score: 0.2999999761581421,
+                  score: 0.8999999761581421,
                   sentiment: 'Positive',
-                },
-              };
-              let navigationExtras: NavigationExtras = {
-                queryParams: {
-                  response: successfulResponse,
                 },
               };
               this.router.navigate(['/result'], { state: successfulResponse });
